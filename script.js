@@ -3,7 +3,9 @@ $("button#imakoko").click(function () {
     function (p) {
       var lat = p.coords.latitude;
       var lon = p.coords.longitude;
-      $("div#output").text("latitude: " + lat + ", longitude: " + lon);
+      var alt = p.coords.altitude;
+      var altAccuracy = p.coords.altitudeAccuracy;
+      $("div#output").text("latitude: " + lat + ", longitude: " + lon + ", altitude: " + alt + ", altitudeAccuracy: " + altAccuracy);
       var map = new ZDC.Map(document.getElementById('map'), {
         latlon: ZDC.wgsTotky(new ZDC.LatLon(lat, lon)),
         zoom: 9
