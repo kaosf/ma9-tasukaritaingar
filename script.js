@@ -5,7 +5,8 @@ $("button#imakoko").click(function () {
       var lon = p.coords.longitude;
       $("div#output").text("latitude: " + lat + ", longitude: " + lon);
       var map = new ZDC.Map(document.getElementById('map'), {
-        latlon: ZDC.wgsTotky(new ZDC.LatLon(lat, lon))
+        latlon: ZDC.wgsTotky(new ZDC.LatLon(lat, lon)),
+        zoom: 9
       });
     },
     function (e) {
