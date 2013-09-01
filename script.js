@@ -1,5 +1,17 @@
 var map;
 
+function judgeDanger(altitude, cb) {
+  if (altitude < 1) {
+    cb(0);
+  }
+  else if (altitude < 3) {
+    cb(1);
+  }
+  else {
+    cb(2);
+  }
+}
+
 $(function () {
   map = new ZDC.Map(document.getElementById('map'), {
     zoom: 9
@@ -11,7 +23,11 @@ $(function () {
     var lon = latlon.lon;
     $("div#output").text("latitude: " + lat + ", longitude: " + lon);
     $.get("getelevation.php", {lat: lat, lon: lon}, function (data) {
-      $("div#altitude").text("altitude: " + JSON.parse(data).elevation + " (m)");
+      var alt = JSON.parse(data).elevation;
+      $("div#altitude").text("altitude: " + alt + " (m)");
+      judgeDanger(function (danger) {
+        $("span#danger").text(danger);
+      });
     });
   });
 });
@@ -24,7 +40,11 @@ $("button#imakoko").click(function () {
       $("div#output").text("latitude: " + lat + ", longitude: " + lon);
       map.moveLatLon(ZDC.wgsTotky(new ZDC.LatLon(lat, lon)));
       $.get("getelevation.php", {lat: lat, lon: lon}, function (data) {
-        $("div#altitude").text("altitude: " + JSON.parse(data).elevation + " (m)");
+        var alt = JSON.parse(data).elevation;
+        $("div#altitude").text("altitude: " + alt + " (m)");
+        judgeDanger(function (danger) {
+          $("span#danger").text(danger);
+        });
       });
     },
     function (e) {
