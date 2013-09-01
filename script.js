@@ -12,8 +12,7 @@ $("button#imakoko").click(function () {
       var lat = p.coords.latitude;
       var lon = p.coords.longitude;
       $("div#output").text("latitude: " + lat + ", longitude: " + lon);
-      // TODO: set map's center with lat and lon
-      // ZDC.wgsTotky(new ZDC.LatLon(lat, lon))
+      map.moveLatLon(ZDC.wgsTotky(new ZDC.LatLon(lat, lon)));
     },
     function (e) {
       $("div#output").text("ERROR");
