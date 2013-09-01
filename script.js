@@ -25,8 +25,22 @@ $(function () {
     $.get("getelevation.php", {lat: lat, lon: lon}, function (data) {
       var alt = JSON.parse(data).elevation;
       $("div#altitude").text("altitude: " + alt + " (m)");
-      judgeDanger(function (danger) {
-        $("span#danger").text(danger);
+      judgeDanger(alt, function (danger) {
+        if (danger == 0) {
+          $("img#batsu").show();
+          $("img#sannkaku").hide();
+          $("img#maru").hide();
+        }
+        else if (danger == 1) {
+          $("img#batsu").hide();
+          $("img#sannkaku").show();
+          $("img#maru").hide();
+        }
+        else {
+          $("img#batsu").hide();
+          $("img#sannkaku").hide();
+          $("img#maru").show();
+        }
       });
     });
   });
@@ -42,8 +56,22 @@ $("button#imakoko").click(function () {
       $.get("getelevation.php", {lat: lat, lon: lon}, function (data) {
         var alt = JSON.parse(data).elevation;
         $("div#altitude").text("altitude: " + alt + " (m)");
-        judgeDanger(function (danger) {
-          $("span#danger").text(danger);
+        judgeDanger(alt, function (danger) {
+          if (danger == 0) {
+            $("img#batsu").show();
+            $("img#sannkaku").hide();
+            $("img#maru").hide();
+          }
+          else if (danger == 1) {
+            $("img#batsu").hide();
+            $("img#sannkaku").show();
+            $("img#maru").hide();
+          }
+          else {
+            $("img#batsu").hide();
+            $("img#sannkaku").hide();
+            $("img#maru").show();
+          }
         });
       });
     },
