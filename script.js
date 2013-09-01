@@ -4,6 +4,13 @@ $(function () {
   map = new ZDC.Map(document.getElementById('map'), {
     zoom: 9
   });
+
+  ZDC.addListener(map, ZDC.MAP_CHG_LATLON, function () {
+    var latlon = map.getLatLon();
+    var lat = latlon.lat;
+    var lon = latlon.lon;
+    $("div#output").text("latitude: " + lat + ", longitude: " + lon);
+  });
 });
 
 $("button#imakoko").click(function () {
