@@ -21,8 +21,13 @@ $xml_array  = xml_to_array($xml);
 //print($xml_array["result"]["item"]["elevation"]);
 $pushjson = array();
 
-if ( !empty($xml_array["result"]) ){
-	
-	$pushjson["elevation"] = $xml_array["result"]["item"]["elevation"];
+if ( !empty($xml_array["result"]["item"]["elevation"]) ){
+  
+  $pushjson["elevation"] = (int)$xml_array["result"]["item"]["elevation"] * 0.1;
+
+} else {
+  //取得できない場所の場合
+  $pushjson["elevation"] = -999.8;
 }
+
 echo json_encode($pushjson);
